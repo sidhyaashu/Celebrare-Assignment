@@ -35,9 +35,9 @@ export default function Gallery() {
     );
   }, [photos, search]);
 
-  const toggleFav = (id: string) => {
+  const toggleFav = useCallback((id: string) => {
     dispatch({ type: TOGGLE_FAV, payload: id });
-  };
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <ErrorMessage message={error} />;

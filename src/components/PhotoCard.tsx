@@ -1,6 +1,7 @@
+import { memo } from "react";
 import type { PhotoCardProps } from "../types/type";
 
-export default function PhotoCard({ photo, isFav, toggleFav }: PhotoCardProps) {
+function PhotoCard({ photo, isFav, toggleFav }: PhotoCardProps) {
   return (
     <div className="overflow-hidden rounded-lg border shadow-sm">
       <img
@@ -19,3 +20,6 @@ export default function PhotoCard({ photo, isFav, toggleFav }: PhotoCardProps) {
     </div>
   );
 }
+
+
+export default memo(PhotoCard);
