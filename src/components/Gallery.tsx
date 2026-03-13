@@ -30,9 +30,11 @@ export default function Gallery() {
   }, []);
 
   const filteredPhotos = useMemo(() => {
-    return photos.filter((photo) =>
-      photo.author.toLowerCase().includes(search.toLowerCase()),
-    );
+    const query = search.trim().toLowerCase();
+
+    if (!query) return photos;
+
+    return photos.filter((photo) => photo.author.toLowerCase().includes(query));
   }, [photos, search]);
 
   const toggleFav = useCallback((id: string) => {
@@ -47,6 +49,12 @@ export default function Gallery() {
       <SearchBar value={search} onChange={handleSearch} />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {filteredPhotos.length === 0 && (
+          <p className="text-gray-500 text-center col-span-full">
+            No photos found
+          </p>
+        )}
+
         {filteredPhotos.map((photo) => (
           <PhotoCard
             key={photo.id}

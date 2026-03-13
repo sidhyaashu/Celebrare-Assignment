@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Photo } from "../types/type";
+import { PHOTOS_API } from "../constant/api";
 
 interface FetchState {
   photos: Photo[];
@@ -7,7 +8,7 @@ interface FetchState {
   error: string | null;
 }
 
-const API_URL = "https://picsum.photos/v2/list?limit=30";
+
 
 export function useFetchPhotos(): FetchState {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -19,7 +20,7 @@ export function useFetchPhotos(): FetchState {
 
     const fetchPhotos = async () => {
       try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(PHOTOS_API, {
         signal: controller.signal
       });
 

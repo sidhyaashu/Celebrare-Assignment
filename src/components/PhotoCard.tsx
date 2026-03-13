@@ -7,13 +7,14 @@ function PhotoCard({ photo, isFav, toggleFav }: PhotoCardProps) {
       <img
         src={photo.download_url}
         alt={photo.author}
+        loading="lazy"
         className="h-48 w-full object-cover"
       />
 
       <div className="flex items-center justify-between p-3">
         <p className="text-sm font-medium">{photo.author}</p>
 
-        <button onClick={() => toggleFav(photo.id)} className="text-xl cursor-pointer">
+        <button aria-label="toggle favorite" onClick={() => toggleFav(photo.id)} className="text-xl cursor-pointer">
           {isFav ? "❤️" : "🤍"}
         </button>
       </div>
