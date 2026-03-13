@@ -15,9 +15,13 @@ export function useFetchPhotos(): FetchState {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchPhotos = async () => {
       try {
-        const res = await fetch(API_URL);
+      const res = await fetch(API_URL, {
+        signal: controller.signal
+      });
 
         if (!res.ok) {
           throw new Error("Failed to fetch photos...!!");
@@ -27,7 +31,7 @@ export function useFetchPhotos(): FetchState {
 
         setPhotos(data);
       } catch (err) {
-        if (err instanceof Error) {
+        if (err instanceof Error && err.name !== "AbortError") {
           setError(err.message);
         }
       } finally {
@@ -36,6 +40,7 @@ export function useFetchPhotos(): FetchState {
     };
 
     fetchPhotos();
+    return () => controller.abort();
   }, []);
 
   return { photos, loading, error };
