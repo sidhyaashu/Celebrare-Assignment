@@ -5,7 +5,14 @@ function App() {
   return (
     <>
       <section id="center">
-        <h1 className="text-3xl font-bold text-center my-6">Photo Gallery</h1>
+        <header className="mb-2 text-center">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-1">
+            📸 Photo Gallery
+          </h1>
+          <p className="text-sm text-gray-500">
+            Browse and favourite photos from Picsum Photos
+          </p>
+        </header>
 
         <Gallery />
       </section>
